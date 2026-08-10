@@ -1,0 +1,57 @@
+flowchart TD
+    subgraph Input["Evidence Intake"]
+        D[Disk Image]
+        M[Memory Dump]
+        L[Log Bundle]
+        P[PCAP]
+    end
+
+    D --> ING1[Disk Ingestion]
+    M --> ING2[Memory Ingestion]
+    L --> ING3[Log Ingestion]
+    P --> ING4[PCAP Ingestion]
+
+    subgraph Graph["LangGraph Orchestrator (aria/graph.py)"]
+        AT[AutoTriage]
+        DEC1{decide_next}
+        VA[VolAI]
+        DEC2{decide_next}
+        IAM[IAM Auditor]
+        DEC3{decide_next}
+        PC[AI PCAP Analyst]
+        DEC4{decide_next}
+        DE[AI Detection Engineer]
+    end
+
+    ING1 --> AT
+    ING2 -.available.-> VA
+    ING3 -.available.-> IAM
+    ING4 -.available.-> PC
+
+    AT --> DEC1
+    DEC1 -->|malware/ransomware signal| VA
+    DEC1 -->|no memory signal, logs present| IAM
+    DEC1 -->|nothing left| DE
+
+    VA --> DEC2
+    DEC2 -->|credential theft signal| IAM
+    DEC2 -->|beaconing signal| PC
+    DEC2 -->|nothing left| DE
+
+    IAM --> DEC3
+    DEC3 -->|needs pcap confirmation| PC
+    DEC3 -->|nothing left| DE
+
+    PC --> DEC4
+    DEC4 -->|logs still pending| IAM
+    DEC4 -->|nothing left| DE
+
+    DE --> OUT
+
+    subgraph OUT["Output Package"]
+        HM[ATT&CK Heatmap<br/>+ Navigator Layer JSON]
+        RE[Executive Brief]
+        RT[Technical Findings]
+        RL[Legal Evidence Report]
+        CS[case_state.json]
+    end

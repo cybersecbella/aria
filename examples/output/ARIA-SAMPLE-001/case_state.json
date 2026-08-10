@@ -1,0 +1,716 @@
+{
+  "case_id": "ARIA-SAMPLE-001",
+  "case_name": "Northshore Clinic Ransomware (Sample)",
+  "analyst": "Sample Analyst",
+  "started_at": "2026-08-10T16:02:34.016945+00:00",
+  "artifacts": [
+    {
+      "kind": "disk",
+      "path": "data/sample_incident/disk_manifest.json",
+      "sha256": "unverified-in-demo-mode",
+      "collected_at": "2026-08-10T16:02:34.016911+00:00",
+      "description": "Disk artifact manifest provided at CLI invocation."
+    },
+    {
+      "kind": "memory",
+      "path": "data/sample_incident/memory_manifest.json",
+      "sha256": "unverified-in-demo-mode",
+      "collected_at": "2026-08-10T16:02:34.016935+00:00",
+      "description": "Memory artifact manifest provided at CLI invocation."
+    },
+    {
+      "kind": "logs",
+      "path": "data/sample_incident/log_manifest.json",
+      "sha256": "unverified-in-demo-mode",
+      "collected_at": "2026-08-10T16:02:34.016940+00:00",
+      "description": "Logs artifact manifest provided at CLI invocation."
+    },
+    {
+      "kind": "pcap",
+      "path": "data/sample_incident/pcap_manifest.json",
+      "sha256": "unverified-in-demo-mode",
+      "collected_at": "2026-08-10T16:02:34.016943+00:00",
+      "description": "Pcap artifact manifest provided at CLI invocation."
+    }
+  ],
+  "signals": {
+    "malware_dropped": true,
+    "ransomware_indicators": true,
+    "anti_forensics": true,
+    "execution_confirmed": true,
+    "needs_memory_analysis": true,
+    "credential_theft": true,
+    "process_injection": true,
+    "c2_candidate_ips": [
+      "185.220.101.47"
+    ],
+    "beaconing_observed": true,
+    "needs_iam_audit": true,
+    "needs_pcap_analysis": true,
+    "identity_compromise": true,
+    "mailbox_tampering": true,
+    "overprivileged_account": true,
+    "needs_detection_engineering": true,
+    "c2_confirmed": true,
+    "abnormal_internal_transfer": true
+  },
+  "findings": [
+    {
+      "id": "autotriage-file-1",
+      "title": "Suspicious file: C:\\Users\\jmartin\\Downloads\\Invoice_0847.xlsm",
+      "description": "Macro-enabled spreadsheet, delivered via email attachment",
+      "severity": "medium",
+      "confidence": 0.5,
+      "attack_techniques": [
+        "T1486"
+      ],
+      "iocs": [
+        "1f3a5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a"
+      ],
+      "evidence_refs": [
+        "disk-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AutoTriage"
+    },
+    {
+      "id": "autotriage-file-2",
+      "title": "Suspicious file: C:\\Windows\\Temp\\svch0st.exe",
+      "description": "Masquerading as svchost.exe, unsigned, dropped by macro",
+      "severity": "high",
+      "confidence": 0.8,
+      "attack_techniques": [
+        "T1204.002",
+        "T1036.005"
+      ],
+      "iocs": [
+        "2e4b6d8f0a2c4e6b8d0f2a4c6e8b0d2f4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b"
+      ],
+      "evidence_refs": [
+        "disk-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AutoTriage"
+    },
+    {
+      "id": "autotriage-file-3",
+      "title": "Suspicious file: C:\\ProgramData\\wintmp\\mimidump.log",
+      "description": "Credential dumper output artifact",
+      "severity": "medium",
+      "confidence": 0.5,
+      "attack_techniques": [
+        "T1486"
+      ],
+      "iocs": [
+        "3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e1b3d5f"
+      ],
+      "evidence_refs": [
+        "disk-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AutoTriage"
+    },
+    {
+      "id": "autotriage-file-4",
+      "title": "Suspicious file: C:\\Users\\jmartin\\Documents\\Finance\\Q3_Projections.xlsx.locked",
+      "description": "Encrypted by ransomware, extension appended",
+      "severity": "medium",
+      "confidence": 0.5,
+      "attack_techniques": [
+        "T1486"
+      ],
+      "iocs": [
+        "4c6e8b0d2f4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a2c4e6b8d0f2a4c6e"
+      ],
+      "evidence_refs": [
+        "disk-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AutoTriage"
+    },
+    {
+      "id": "autotriage-ransom-5",
+      "title": "Ransom note recovered",
+      "description": "All your files have been encrypted. Contact darkhollow_support@protonmail.com with your case ID.",
+      "severity": "critical",
+      "confidence": 0.95,
+      "attack_techniques": [
+        "T1486",
+        "T1490"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "disk-01"
+      ],
+      "timestamp": "2026-08-04T11:03:10Z",
+      "source_tool": "AutoTriage"
+    },
+    {
+      "id": "autotriage-timestomp-6",
+      "title": "Timestomping detected: C:\\Windows\\Temp\\svch0st.exe",
+      "description": "Standard timestamps inconsistent with $FN timestamps",
+      "severity": "high",
+      "confidence": 0.75,
+      "attack_techniques": [
+        "T1070.006"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "disk-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AutoTriage"
+    },
+    {
+      "id": "volai-proc-1",
+      "title": "Suspicious process: svch0st.exe (pid 4412)",
+      "description": "Office spawning an unsigned binary from Temp",
+      "severity": "high",
+      "confidence": 0.8,
+      "attack_techniques": [
+        "T1059.001"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "mem-01"
+      ],
+      "timestamp": null,
+      "source_tool": "VolAI"
+    },
+    {
+      "id": "volai-proc-2",
+      "title": "Suspicious process: powershell.exe (pid 4488)",
+      "description": "Encoded PowerShell launched by malware dropper",
+      "severity": "high",
+      "confidence": 0.8,
+      "attack_techniques": [
+        "T1059.001"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "mem-01"
+      ],
+      "timestamp": null,
+      "source_tool": "VolAI"
+    },
+    {
+      "id": "volai-proc-3",
+      "title": "Suspicious process: rundll32.exe (pid 4501)",
+      "description": "LSASS credential access module",
+      "severity": "high",
+      "confidence": 0.8,
+      "attack_techniques": [
+        "T1059.001"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "mem-01"
+      ],
+      "timestamp": null,
+      "source_tool": "VolAI"
+    },
+    {
+      "id": "volai-lsass-4",
+      "title": "LSASS memory access consistent with credential dumping",
+      "description": "Consistent with credential dumping (Mimikatz-style handle access)",
+      "severity": "critical",
+      "confidence": 0.9,
+      "attack_techniques": [
+        "T1003.001"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "mem-01"
+      ],
+      "timestamp": null,
+      "source_tool": "VolAI"
+    },
+    {
+      "id": "volai-malfind-5",
+      "title": "Injected memory region in pid 4488",
+      "description": "Injected shellcode region, no backing file",
+      "severity": "high",
+      "confidence": 0.75,
+      "attack_techniques": [
+        "T1055"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "mem-01"
+      ],
+      "timestamp": null,
+      "source_tool": "VolAI"
+    },
+    {
+      "id": "volai-net-6",
+      "title": "Live connection from pid 4488 to 185.220.101.47:443",
+      "description": "Beaconing to unrecognized external IP over TLS",
+      "severity": "high",
+      "confidence": 0.7,
+      "attack_techniques": [
+        "T1071.001"
+      ],
+      "iocs": [
+        "185.220.101.47"
+      ],
+      "evidence_refs": [
+        "mem-01"
+      ],
+      "timestamp": null,
+      "source_tool": "VolAI"
+    },
+    {
+      "id": "iam-anomlogon-1",
+      "title": "Anomalous service-account logon: svc_backup",
+      "description": "Interactive-style network logon using service account outside normal hours",
+      "severity": "high",
+      "confidence": 0.7,
+      "attack_techniques": [
+        "T1078.003"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "logs-01"
+      ],
+      "timestamp": "2026-08-04T09:42:03Z",
+      "source_tool": "IAM Auditor"
+    },
+    {
+      "id": "iam-privesc-2",
+      "title": "Sensitive privileges assigned to svc_backup",
+      "description": "Special privileges assigned: SeDebugPrivilege, SeBackupPrivilege",
+      "severity": "medium",
+      "confidence": 0.6,
+      "attack_techniques": [
+        "T1078"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "logs-01"
+      ],
+      "timestamp": "2026-08-04T09:43:10Z",
+      "source_tool": "IAM Auditor"
+    },
+    {
+      "id": "iam-travel-3",
+      "title": "Impossible travel sign-in for jmartin@northshoreclinic.org",
+      "description": "Sign-in from Amsterdam, NL 11 minutes after sign-in from Chicago, US (impossible travel)",
+      "severity": "critical",
+      "confidence": 0.85,
+      "attack_techniques": [
+        "T1078.004"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "logs-01"
+      ],
+      "timestamp": "2026-08-04T10:05:44Z",
+      "source_tool": "IAM Auditor"
+    },
+    {
+      "id": "iam-mailrule-4",
+      "title": "Malicious inbox rule created by svc_backup",
+      "description": "New inbox rule created: forward all mail matching 'wire' to external address, then delete",
+      "severity": "high",
+      "confidence": 0.8,
+      "attack_techniques": [
+        "T1114.003",
+        "T1564.008"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "logs-01"
+      ],
+      "timestamp": "2026-08-04T10:31:19Z",
+      "source_tool": "IAM Auditor"
+    },
+    {
+      "id": "iam-overpriv-5",
+      "title": "Over-privileged service account: svc_backup",
+      "description": "Service account is a member of Domain Admins -- far broader than backup duties require",
+      "severity": "high",
+      "confidence": 0.75,
+      "attack_techniques": [
+        "T1078.003"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "logs-01"
+      ],
+      "timestamp": null,
+      "source_tool": "IAM Auditor"
+    },
+    {
+      "id": "iam-nomfa-6",
+      "title": "Privileged account without MFA: svc_backup",
+      "description": "svc_backup is not enrolled in MFA and holds Backup Operators, Domain Admins access.",
+      "severity": "medium",
+      "confidence": 0.6,
+      "attack_techniques": [
+        "T1078"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "logs-01"
+      ],
+      "timestamp": null,
+      "source_tool": "IAM Auditor"
+    },
+    {
+      "id": "pcap-c2-1",
+      "title": "C2 traffic confirmed: 10.20.4.117 -> 185.220.101.47:443",
+      "description": "TLS to a domain registered 9 days ago; JA3 matches known C2 framework fingerprint",
+      "severity": "critical",
+      "confidence": 0.9,
+      "attack_techniques": [
+        "T1071.001",
+        "T1568"
+      ],
+      "iocs": [
+        "185.220.101.47"
+      ],
+      "evidence_refs": [
+        "pcap-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AI PCAP Analyst"
+    },
+    {
+      "id": "pcap-c2-2",
+      "title": "C2 traffic confirmed: 10.20.4.117 -> 185.220.101.47:443",
+      "description": "Periodic ~60s beacon interval, low jitter -- consistent with C2 heartbeat",
+      "severity": "critical",
+      "confidence": 0.9,
+      "attack_techniques": [
+        "T1071.001",
+        "T1568"
+      ],
+      "iocs": [
+        "185.220.101.47"
+      ],
+      "evidence_refs": [
+        "pcap-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AI PCAP Analyst"
+    },
+    {
+      "id": "pcap-smb-3",
+      "title": "Abnormal SMB volume: 10.20.6.55 -> 10.20.6.71",
+      "description": "Abnormal SMB volume between file server and backup host outside backup window",
+      "severity": "high",
+      "confidence": 0.65,
+      "attack_techniques": [
+        "T1021.002",
+        "T1486"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "pcap-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AI PCAP Analyst"
+    },
+    {
+      "id": "pcap-dns-4",
+      "title": "DNS lookup for Tor gateway / onion domain",
+      "description": "DNS lookups for onion gateway domain",
+      "severity": "medium",
+      "confidence": 0.6,
+      "attack_techniques": [
+        "T1071.004"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "pcap-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AI PCAP Analyst"
+    },
+    {
+      "id": "pcap-alert-5",
+      "title": "ET MALWARE Possible Cobalt-Strike-like JA3",
+      "description": "10.20.4.117 -> 185.220.101.47",
+      "severity": "high",
+      "confidence": 0.7,
+      "attack_techniques": [
+        "T1071.001"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "pcap-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AI PCAP Analyst"
+    },
+    {
+      "id": "pcap-alert-6",
+      "title": "ET POLICY TLS SNI for newly registered domain",
+      "description": "10.20.4.117 -> 185.220.101.47",
+      "severity": "medium",
+      "confidence": 0.7,
+      "attack_techniques": [
+        "T1071.001"
+      ],
+      "iocs": [],
+      "evidence_refs": [
+        "pcap-01"
+      ],
+      "timestamp": null,
+      "source_tool": "AI PCAP Analyst"
+    },
+    {
+      "id": "det-corr-1",
+      "title": "Correlated attack chain: phishing dropper -> credential theft",
+      "description": "AutoTriage identified a masqueraded binary dropped by a macro-enabled attachment; VolAI independently confirmed LSASS credential access from a process in the same execution chain. High-confidence single incident, not two unrelated events.",
+      "severity": "critical",
+      "confidence": 0.9,
+      "attack_techniques": [
+        "T1204.002",
+        "T1003.001"
+      ],
+      "iocs": [],
+      "evidence_refs": [],
+      "timestamp": null,
+      "source_tool": "AI Detection Engineer"
+    },
+    {
+      "id": "det-corr-2",
+      "title": "Correlated attack chain: stolen credentials used for lateral movement",
+      "description": "Credentials harvested in memory were used minutes later for an anomalous privileged service-account logon and an impossible-travel sign-in, indicating the stolen material was actively used, not just collected.",
+      "severity": "critical",
+      "confidence": 0.85,
+      "attack_techniques": [
+        "T1003.001",
+        "T1078.004",
+        "T1021"
+      ],
+      "iocs": [],
+      "evidence_refs": [],
+      "timestamp": null,
+      "source_tool": "AI Detection Engineer"
+    },
+    {
+      "id": "det-corr-3",
+      "title": "Correlated attack chain: memory-resident implant confirmed communicating with C2",
+      "description": "The network connection observed live in memory by VolAI matches a JA3-fingerprinted TLS session to a newly-registered domain captured by the PCAP Analyst, confirming active command-and-control rather than benign traffic.",
+      "severity": "critical",
+      "confidence": 0.9,
+      "attack_techniques": [
+        "T1071.001",
+        "T1568"
+      ],
+      "iocs": [],
+      "evidence_refs": [],
+      "timestamp": null,
+      "source_tool": "AI Detection Engineer"
+    },
+    {
+      "id": "det-corr-4",
+      "title": "Correlated attack chain: shadow-copy deletion preceding mass file encryption",
+      "description": "A shadow-copy deletion command was logged shortly before abnormal SMB volume and mass file-rename activity on the finance share, and encrypted files plus a ransom note were recovered from disk -- consistent with ransomware deployment following data staging.",
+      "severity": "critical",
+      "confidence": 0.9,
+      "attack_techniques": [
+        "T1490",
+        "T1486",
+        "T1021.002"
+      ],
+      "iocs": [],
+      "evidence_refs": [],
+      "timestamp": null,
+      "source_tool": "AI Detection Engineer"
+    }
+  ],
+  "iocs": [
+    "185.220.101.47",
+    "1f3a5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a",
+    "2e4b6d8f0a2c4e6b8d0f2a4c6e8b0d2f4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b",
+    "3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e1b3d5f",
+    "4c6e8b0d2f4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a2c4e6b8d0f2a4c6e"
+  ],
+  "attack_techniques": {
+    "T1486": 6,
+    "T1204.002": 2,
+    "T1036.005": 1,
+    "T1490": 2,
+    "T1070.006": 1,
+    "T1059.001": 3,
+    "T1003.001": 3,
+    "T1055": 1,
+    "T1071.001": 6,
+    "T1078.003": 2,
+    "T1078": 2,
+    "T1078.004": 2,
+    "T1114.003": 1,
+    "T1564.008": 1,
+    "T1568": 3,
+    "T1021.002": 2,
+    "T1071.004": 1,
+    "T1021": 1
+  },
+  "tool_runs": [
+    {
+      "tool": "AutoTriage",
+      "reason": "Always runs first: cheapest signal source, decides what else is worth analyzing.",
+      "started_at": "2026-08-10T16:02:34.016964+00:00",
+      "finished_at": "2026-08-10T16:02:34.021751+00:00",
+      "finding_count": 6
+    },
+    {
+      "tool": "VolAI",
+      "reason": "Disk triage flagged malware/ransomware indicators requiring memory analysis.",
+      "started_at": "2026-08-10T16:02:34.021775+00:00",
+      "finished_at": "2026-08-10T16:02:34.028312+00:00",
+      "finding_count": 6
+    },
+    {
+      "tool": "IAM Auditor",
+      "reason": "Credential theft or identity signal detected upstream; auditing account abuse.",
+      "started_at": "2026-08-10T16:02:34.028326+00:00",
+      "finished_at": "2026-08-10T16:02:34.032332+00:00",
+      "finding_count": 6
+    },
+    {
+      "tool": "AI PCAP Analyst",
+      "reason": "Live beaconing observed in memory; confirming C2 on the wire.",
+      "started_at": "2026-08-10T16:02:34.032344+00:00",
+      "finished_at": "2026-08-10T16:02:34.034974+00:00",
+      "finding_count": 6
+    },
+    {
+      "tool": "AI Detection Engineer",
+      "reason": "All available evidence sources exhausted; correlating findings and drafting detections.",
+      "started_at": "2026-08-10T16:02:34.034982+00:00",
+      "finished_at": "2026-08-10T16:02:34.034993+00:00",
+      "finding_count": 4
+    }
+  ],
+  "decision_log": [
+    "Case ARIA-SAMPLE-001 opened for Northshore Clinic Ransomware (Sample) with 4 artifact(s).",
+    "[AutoTriage] malware/ransomware indicators on disk -> routing to VolAI for memory analysis.",
+    "[orchestrator] routing to VolAI (priority 3); remaining candidates: ['IAM Auditor', 'AI PCAP Analyst']",
+    "[VolAI] credential dumping confirmed in memory -> routing to IAM Auditor to check for downstream account abuse.",
+    "[VolAI] live C2-style connection observed -> routing to AI PCAP Analyst to confirm on the wire.",
+    "[orchestrator] routing to IAM Auditor (priority 3); remaining candidates: ['AI PCAP Analyst']",
+    "[IAM Auditor] confirmed identity compromise / over-privileged access -> flagging for detection engineering once evidence collection completes.",
+    "[orchestrator] routing to AI PCAP Analyst (priority 3); remaining candidates: []",
+    "[AI PCAP Analyst] traffic analysis complete -> flagging for detection engineering.",
+    "[orchestrator] no evidence-gathering tools remain -- routing to AI Detection Engineer for correlation and rule drafting.",
+    "[AI Detection Engineer] correlated 24 raw findings into 4 attack-chain finding(s) and drafted 5 detection rule(s)."
+  ],
+  "completed_tools": [
+    "AI Detection Engineer",
+    "AI PCAP Analyst",
+    "AutoTriage",
+    "IAM Auditor",
+    "VolAI"
+  ],
+  "pending_tools": [],
+  "detection_rules": [
+    {
+      "title": "Suspicious LSASS Access by Non-Standard Process",
+      "id": "aria-rule-lsass-access",
+      "logsource": {
+        "category": "process_access",
+        "product": "windows"
+      },
+      "detection": {
+        "selection": {
+          "TargetImage|endswith": "\\lsass.exe",
+          "GrantedAccess": "0x1010"
+        },
+        "condition": "selection"
+      },
+      "attack_techniques": [
+        "T1003.001"
+      ],
+      "level": "high"
+    },
+    {
+      "title": "Impossible Travel Sign-In for Privileged Identity",
+      "id": "aria-rule-impossible-travel",
+      "logsource": {
+        "category": "authentication",
+        "product": "azuread"
+      },
+      "detection": {
+        "selection": {
+          "event": "SigninLogs",
+          "travel_delta_minutes": "<60",
+          "distance_km": ">500"
+        },
+        "condition": "selection"
+      },
+      "attack_techniques": [
+        "T1078.004"
+      ],
+      "level": "critical"
+    },
+    {
+      "title": "Beaconing TLS Session to Newly Registered Domain",
+      "id": "aria-rule-c2-beacon",
+      "logsource": {
+        "category": "network_connection",
+        "product": "zeek"
+      },
+      "detection": {
+        "selection": {
+          "domain_age_days": "<30",
+          "interval_jitter": "<5%"
+        },
+        "condition": "selection"
+      },
+      "attack_techniques": [
+        "T1071.001",
+        "T1568"
+      ],
+      "level": "high"
+    },
+    {
+      "title": "Shadow Copy Deletion Followed by Mass File Rename",
+      "id": "aria-rule-ransomware-staging",
+      "logsource": {
+        "category": "process_creation",
+        "product": "windows"
+      },
+      "detection": {
+        "selection": {
+          "CommandLine|contains": "vssadmin delete shadows"
+        },
+        "condition": "selection"
+      },
+      "attack_techniques": [
+        "T1490",
+        "T1486"
+      ],
+      "level": "critical"
+    },
+    {
+      "title": "Service Account Holding Domain Admin Membership",
+      "id": "aria-rule-overprivileged-svc",
+      "logsource": {
+        "category": "identity_posture",
+        "product": "activedirectory"
+      },
+      "detection": {
+        "selection": {
+          "account_type": "service",
+          "group_membership": "Domain Admins"
+        },
+        "condition": "selection"
+      },
+      "attack_techniques": [
+        "T1078.003"
+      ],
+      "level": "medium"
+    }
+  ],
+  "heatmap_layer_path": "examples/output/ARIA-SAMPLE-001/attck_navigator_layer.json",
+  "heatmap_html_path": "examples/output/ARIA-SAMPLE-001/attck_heatmap.html",
+  "report_paths": {
+    "executive": "examples/output/ARIA-SAMPLE-001/executive_brief.md",
+    "technical": "examples/output/ARIA-SAMPLE-001/technical_findings.md",
+    "legal": "examples/output/ARIA-SAMPLE-001/legal_evidence_report.md"
+  }
+}

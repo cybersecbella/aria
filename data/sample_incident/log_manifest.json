@@ -1,0 +1,29 @@
+{
+  "artifact_id": "logs-01",
+  "sources": ["WinEventLog:Security", "WinEventLog:PowerShell/Operational", "AzureAD SigninLogs", "O365 AuditLog"],
+  "events": [
+    {"time": "2026-08-04T09:12:20Z", "event_id": 4688, "host": "WKS-FIN07", "user": "jmartin", "detail": "New process: EXCEL.EXE -> svch0st.exe"},
+    {"time": "2026-08-04T09:14:55Z", "event_id": 4104, "host": "WKS-FIN07", "user": "jmartin", "detail": "ScriptBlock logged: base64-encoded download cradle to 185.220.101.47"},
+    {"time": "2026-08-04T09:42:03Z", "event_id": 4624, "host": "DC01", "user": "svc_backup", "logon_type": 3, "source_ip": "10.20.4.117", "detail": "Interactive-style network logon using service account outside normal hours"},
+    {"time": "2026-08-04T09:43:10Z", "event_id": 4672, "host": "DC01", "user": "svc_backup", "detail": "Special privileges assigned: SeDebugPrivilege, SeBackupPrivilege"},
+    {"time": "2026-08-04T10:05:44Z", "provider": "AzureAD", "user": "jmartin@northshoreclinic.org", "detail": "Sign-in from Amsterdam, NL 11 minutes after sign-in from Chicago, US (impossible travel)"},
+    {"time": "2026-08-04T10:31:19Z", "provider": "O365", "user": "svc_backup", "detail": "New inbox rule created: forward all mail matching 'wire' to external address, then delete"},
+    {"time": "2026-08-04T10:58:33Z", "event_id": 4104, "host": "FS01", "user": "svc_backup", "detail": "ScriptBlock logged: vssadmin delete shadows /all /quiet"},
+    {"time": "2026-08-04T11:02:40Z", "event_id": 4663, "host": "FS01", "user": "svc_backup", "detail": "Mass file write/rename events across \\\\FS01\\Finance$ (1,204 files in 90 seconds)"}
+  ],
+  "iam_findings": {
+    "svc_backup": {
+      "type": "service_account",
+      "assigned_roles": ["Backup Operators", "Domain Admins"],
+      "note": "Service account is a member of Domain Admins -- far broader than backup duties require",
+      "mfa_enrolled": false,
+      "password_last_set_days_ago": 612
+    },
+    "jmartin": {
+      "type": "user",
+      "assigned_roles": ["Finance Users"],
+      "mfa_enrolled": true,
+      "note": "MFA satisfied via legacy per-app password, bypassing conditional access"
+    }
+  }
+}

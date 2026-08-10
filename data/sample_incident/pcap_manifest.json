@@ -1,0 +1,16 @@
+{
+  "artifact_id": "pcap-01",
+  "capture_path": "evidence/border_mirror_20260804.pcapng",
+  "sha256": "6a8c0e2b4d6f8a0c2e4b6d8f0a2c4e6b8d0f2a4c6e8b0d2f4a6c8e0b2d4f6a8c",
+  "duration_seconds": 9400,
+  "flows": [
+    {"src": "10.20.4.117", "sport": 52931, "dst": "185.220.101.47", "dport": 443, "proto": "TCP", "bytes": 812004, "packets": 3110, "sni": "cdn-assets-static.net", "note": "TLS to a domain registered 9 days ago; JA3 matches known C2 framework fingerprint"},
+    {"src": "10.20.4.117", "sport": 52940, "dst": "185.220.101.47", "dport": 443, "proto": "TCP", "bytes": 44012, "packets": 210, "note": "Periodic ~60s beacon interval, low jitter -- consistent with C2 heartbeat"},
+    {"src": "10.20.6.55", "sport": 445, "dst": "10.20.6.71", "dport": 445, "proto": "SMB", "bytes": 190004000, "packets": 88210, "note": "Abnormal SMB volume between file server and backup host outside backup window"},
+    {"src": "10.20.4.117", "sport": 53201, "dst": "8.8.8.8", "dport": 53, "proto": "DNS", "queries": ["cdn-assets-static.net", "darkhollow-paste.onion.to"], "note": "DNS lookups for onion gateway domain"}
+  ],
+  "alerts": [
+    {"signature": "ET MALWARE Possible Cobalt-Strike-like JA3", "src": "10.20.4.117", "dst": "185.220.101.47", "severity": "high"},
+    {"signature": "ET POLICY TLS SNI for newly registered domain", "src": "10.20.4.117", "dst": "185.220.101.47", "severity": "medium"}
+  ]
+}

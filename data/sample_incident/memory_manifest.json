@@ -1,0 +1,26 @@
+{
+  "artifact_id": "mem-01",
+  "image_path": "evidence/WKS-FIN07_mem.raw",
+  "sha256": "5b7d9f1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d",
+  "acquisition_tool": "WinPmem (simulated)",
+  "os_profile": "Win10x64_19045",
+  "suspicious_processes": [
+    {"pid": 4412, "ppid": 3980, "name": "svch0st.exe", "path": "C:\\Windows\\Temp\\svch0st.exe", "cmdline": "svch0st.exe -k netsvcs -stage2", "parent_name": "EXCEL.EXE", "note": "Office spawning an unsigned binary from Temp"},
+    {"pid": 4488, "ppid": 4412, "name": "powershell.exe", "cmdline": "powershell -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQA...", "note": "Encoded PowerShell launched by malware dropper"},
+    {"pid": 4501, "ppid": 4488, "name": "rundll32.exe", "cmdline": "rundll32.exe C:\\ProgramData\\wintmp\\cred.dll,Dump", "note": "LSASS credential access module"}
+  ],
+  "lsass_access": [
+    {"accessing_pid": 4501, "target": "lsass.exe", "access_mask": "0x1010", "note": "Consistent with credential dumping (Mimikatz-style handle access)"}
+  ],
+  "network_connections": [
+    {"pid": 4488, "local": "10.20.4.117:52931", "remote": "185.220.101.47:443", "state": "ESTABLISHED", "note": "Beaconing to unrecognized external IP over TLS"}
+  ],
+  "malfind_hits": [
+    {"pid": 4488, "region": "0x1a30000", "protection": "PAGE_EXECUTE_READWRITE", "note": "Injected shellcode region, no backing file"}
+  ],
+  "extracted_strings": [
+    "sekurlsa::logonpasswords",
+    "darkhollow_support@protonmail.com",
+    "vssadmin delete shadows /all /quiet"
+  ]
+}

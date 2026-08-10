@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aria-ir"
+version = "0.1.0"
+description = "ARIA -- AI-orchestrated incident response agent (LangGraph-based)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "langgraph>=0.2.0",
+    "langchain-core>=0.3.0",
+    "anthropic>=0.34.0",
+    "jinja2>=3.1.0",
+    "rich>=13.7.0",
+]
+
+[project.scripts]
+aria = "aria.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["aria*"]

@@ -1,0 +1,47 @@
+{
+  "artifact_id": "disk-01",
+  "image_path": "evidence/WKS-FIN07_C.E01",
+  "sha256": "b7a1c9e2f4d6a8b0c1e3f5a7b9d1c3e5f7a9b1d3e5f7a9b1c3e5f7a9b1d3e5f7",
+  "acquisition_tool": "FTK Imager 4.7 (simulated)",
+  "filesystem": "NTFS",
+  "suspicious_files": [
+    {
+      "path": "C:\\Users\\jmartin\\Downloads\\Invoice_0847.xlsm",
+      "created": "2026-08-04T09:12:07Z",
+      "sha256": "1f3a5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a",
+      "note": "Macro-enabled spreadsheet, delivered via email attachment"
+    },
+    {
+      "path": "C:\\Windows\\Temp\\svch0st.exe",
+      "created": "2026-08-04T09:14:41Z",
+      "sha256": "2e4b6d8f0a2c4e6b8d0f2a4c6e8b0d2f4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b",
+      "note": "Masquerading as svchost.exe, unsigned, dropped by macro"
+    },
+    {
+      "path": "C:\\ProgramData\\wintmp\\mimidump.log",
+      "created": "2026-08-04T09:41:12Z",
+      "sha256": "3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e1b3d5f",
+      "note": "Credential dumper output artifact"
+    },
+    {
+      "path": "C:\\Users\\jmartin\\Documents\\Finance\\Q3_Projections.xlsx.locked",
+      "created": "2026-08-04T11:02:55Z",
+      "sha256": "4c6e8b0d2f4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a2c4e6b8d0f2a4c6e",
+      "note": "Encrypted by ransomware, extension appended"
+    }
+  ],
+  "ransom_notes": [
+    {
+      "path": "C:\\Users\\jmartin\\Desktop\\README_RESTORE.txt",
+      "created": "2026-08-04T11:03:10Z",
+      "excerpt": "All your files have been encrypted. Contact darkhollow_support@protonmail.com with your case ID."
+    }
+  ],
+  "mft_anomalies": [
+    {"path": "C:\\Windows\\Temp\\svch0st.exe", "timestomp_detected": true, "note": "Standard timestamps inconsistent with $FN timestamps"}
+  ],
+  "prefetch": [
+    {"exe": "SVCH0ST.EXE-3A21F9C1.pf", "run_count": 4, "last_run": "2026-08-04T09:44:02Z"},
+    {"exe": "POWERSHELL.EXE-9B4E21A0.pf", "run_count": 11, "last_run": "2026-08-04T10:58:33Z"}
+  ]
+}
