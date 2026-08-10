@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ARIA ATT&amp;CK Heatmap -- Test Run</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif; background:#0d1117; color:#e6edf3; margin:0; padding:24px; }
+  h1 { font-size: 20px; margin: 0 0 4px 0; }
+  .meta { color:#8b949e; font-size:13px; margin-bottom:20px; }
+  .board { display:flex; gap:10px; overflow-x:auto; align-items:flex-start; }
+  .tactic-col { min-width:190px; background:#161b22; border-radius:8px; padding:8px; }
+  .tactic-header { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:#c9d1d9; padding:6px 4px 10px 4px; border-bottom:1px solid #30363d; margin-bottom:6px; }
+  .cell { border-radius:5px; padding:8px; margin-bottom:6px; color:#111; font-size:12px; line-height:1.35; cursor:default; }
+  .tid { display:block; font-weight:700; }
+  .tname { display:block; font-weight:500; }
+  .count { display:block; font-size:11px; opacity:.75; margin-top:2px; }
+  .legend { display:flex; gap:14px; margin-top:20px; font-size:12px; color:#8b949e; align-items:center; }
+  .swatch { width:14px; height:14px; border-radius:3px; display:inline-block; margin-right:6px; vertical-align:middle; }
+</style>
+</head>
+<body>
+  <h1>ATT&amp;CK Technique Heatmap</h1>
+  <div class="meta">Case: Test Run (ARIA-20260810-C8FD17) &middot;
+  18 unique technique(s) across
+  5 tool run(s)</div>
+  <div class="board">
+    <div class="tactic-col"><div class="tactic-header">Execution</div><div class="cell" style="background:#ff7a45" title="Command and Scripting Interpreter: PowerShell -- observed 3x"><span class="tid">T1059.001</span><span class="tname">Command and Scripting Interpreter: PowerShell</span><span class="count">x3</span></div><div class="cell" style="background:#ffb454" title="User Execution: Malicious File -- observed 2x"><span class="tid">T1204.002</span><span class="tname">User Execution: Malicious File</span><span class="count">x2</span></div></div><div class="tactic-col"><div class="tactic-header">Privilege Escalation</div><div class="cell" style="background:#ffb454" title="Valid Accounts: Local Accounts -- observed 2x"><span class="tid">T1078.003</span><span class="tname">Valid Accounts: Local Accounts</span><span class="count">x2</span></div></div><div class="tactic-col"><div class="tactic-header">Defense Evasion</div><div class="cell" style="background:#ffb454" title="Valid Accounts -- observed 2x"><span class="tid">T1078</span><span class="tname">Valid Accounts</span><span class="count">x2</span></div><div class="cell" style="background:#ffb454" title="Valid Accounts: Cloud Accounts -- observed 2x"><span class="tid">T1078.004</span><span class="tname">Valid Accounts: Cloud Accounts</span><span class="count">x2</span></div><div class="cell" style="background:#ffe3b3" title="Masquerading: Match Legitimate Name or Location -- observed 1x"><span class="tid">T1036.005</span><span class="tname">Masquerading: Match Legitimate Name or Location</span><span class="count">x1</span></div><div class="cell" style="background:#ffe3b3" title="Indicator Removal: Timestomp -- observed 1x"><span class="tid">T1070.006</span><span class="tname">Indicator Removal: Timestomp</span><span class="count">x1</span></div><div class="cell" style="background:#ffe3b3" title="Process Injection -- observed 1x"><span class="tid">T1055</span><span class="tname">Process Injection</span><span class="count">x1</span></div><div class="cell" style="background:#ffe3b3" title="Hide Artifacts: Email Hiding Rules -- observed 1x"><span class="tid">T1564.008</span><span class="tname">Hide Artifacts: Email Hiding Rules</span><span class="count">x1</span></div></div><div class="tactic-col"><div class="tactic-header">Credential Access</div><div class="cell" style="background:#ff7a45" title="OS Credential Dumping: LSASS Memory -- observed 3x"><span class="tid">T1003.001</span><span class="tname">OS Credential Dumping: LSASS Memory</span><span class="count">x3</span></div></div><div class="tactic-col"><div class="tactic-header">Lateral Movement</div><div class="cell" style="background:#ffb454" title="Remote Services: SMB/Windows Admin Shares -- observed 2x"><span class="tid">T1021.002</span><span class="tname">Remote Services: SMB/Windows Admin Shares</span><span class="count">x2</span></div><div class="cell" style="background:#ffe3b3" title="Remote Services -- observed 1x"><span class="tid">T1021</span><span class="tname">Remote Services</span><span class="count">x1</span></div></div><div class="tactic-col"><div class="tactic-header">Collection</div><div class="cell" style="background:#ffe3b3" title="Email Collection: Email Forwarding Rule -- observed 1x"><span class="tid">T1114.003</span><span class="tname">Email Collection: Email Forwarding Rule</span><span class="count">x1</span></div></div><div class="tactic-col"><div class="tactic-header">Command And Control</div><div class="cell" style="background:#e0342b" title="Application Layer Protocol: Web Protocols -- observed 6x"><span class="tid">T1071.001</span><span class="tname">Application Layer Protocol: Web Protocols</span><span class="count">x6</span></div><div class="cell" style="background:#ff7a45" title="Dynamic Resolution -- observed 3x"><span class="tid">T1568</span><span class="tname">Dynamic Resolution</span><span class="count">x3</span></div><div class="cell" style="background:#ffe3b3" title="Application Layer Protocol: DNS -- observed 1x"><span class="tid">T1071.004</span><span class="tname">Application Layer Protocol: DNS</span><span class="count">x1</span></div></div><div class="tactic-col"><div class="tactic-header">Impact</div><div class="cell" style="background:#e0342b" title="Data Encrypted for Impact -- observed 6x"><span class="tid">T1486</span><span class="tname">Data Encrypted for Impact</span><span class="count">x6</span></div><div class="cell" style="background:#ffb454" title="Inhibit System Recovery -- observed 2x"><span class="tid">T1490</span><span class="tname">Inhibit System Recovery</span><span class="count">x2</span></div></div>
+  </div>
+  <div class="legend">
+    <span><span class="swatch" style="background:#ffe3b3"></span>Observed once</span>
+    <span><span class="swatch" style="background:#ff7a45"></span>Observed 2-4x</span>
+    <span><span class="swatch" style="background:#8b0000"></span>Observed 5+ / core to incident</span>
+  </div>
+</body>
+</html>

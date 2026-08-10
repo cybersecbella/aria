@@ -9,7 +9,7 @@ aria investigate \
   --memory  data/sample_incident/memory_manifest.json \
   --logs    data/sample_incident/log_manifest.json \
   --pcap    data/sample_incident/pcap_manifest.json \
-  --analyst "J. Rivera" \
+  --analyst "YOUR NAME" \
   --out     examples/output
 ```
 
@@ -137,7 +137,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for a module-by-module breakdown.
 ## Quickstart
 
 ```bash
-git clone https://github.com/<your-org>/aria.git
+git clone https://github.com/cybersecbella/aria.git
 cd aria
 pip install -r requirements.txt
 PYTHONPATH=. python -m aria.cli investigate \
