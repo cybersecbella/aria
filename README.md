@@ -2,6 +2,8 @@
 
 **One command. Four evidence sources. A complete incident response report package.**
 
+writeup: https://www.cybersecbella.com/articles/aria/
+
 ```bash
 aria investigate \
   --case-name "Northshore Clinic Ransomware" \
